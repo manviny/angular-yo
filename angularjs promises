@@ -1,0 +1,48 @@
+https://www.youtube.com/watch?v=cdG_T6ufcbE
+
+// BASIC
+    $scope.addOne = function(num){
+        var q = $q.defer();
+
+        if(angular.isNumber(num)){
+            q.resolve(num+1)
+        }
+        else {
+            q.reject("NaN")
+        }
+        return q.promise;
+    }
+
+    $scope.myValue = 0;
+    $scope.promise = $scope.addOne($scope.myValue)
+    $scope.promise
+    .then(
+        function(v){$scope.myValue = v},
+        function(err){$scope.myValue = err}
+        )
+        
+        
+// ADVANCED
+    $scope.addOne = function(num){
+        var q = $q.defer();
+
+        if(angular.isNumber(num)){
+            q.resolve(num+1)
+        }
+        else {
+            q.reject("NaN")
+        }
+        return q.promise;
+    }
+
+
+    $scope.myValue = 0;
+    $scope.promise = $scope.addOne($scope.myValue)
+    $scope.promise
+    .then(function(v){return $scope.addOne(v)})
+    .then(function(v){return $scope.addOne(v)})
+    .then(function(v){return $scope.addOne(v)})
+    .then(
+        function(v){$scope.myValue = v},
+        function(err){$scope.myValue = err}
+        )
